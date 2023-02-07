@@ -1,122 +1,78 @@
-import { z } from 'zod';
+interface BaseProp {
+  title?: string;
+  required?: string[];
+  description?: string;
+  defaultValue?: string | boolean | number;
+  format?: string;
+  isValueField?: boolean;
+}
 
-export const basePropSchema = z.object({
-  title: z.string().optional(),
-  required: z.array(z.string()).optional(),
-  description: z.string().optional(),
-  defaultValue: z.union([z.string(), z.boolean(), z.number()]).optional(),
-  format: z.string().optional(),
-  isValueField: z.boolean().optional(),
-});
+type MinimumSize = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
-const minimumSizeSchema = z.number().int().positive().lte(12).gte(1);
+interface StringProp extends BaseProp {
+  type: 'string';
+  minLength?: number;
+  maxLength?: number;
+}
 
-const stringPropSchema = z.intersection(
-  basePropSchema,
-  z.object({
-    type: z.literal('string'),
-    minLength: z.number().optional(),
-    maxLength: z.number().optional(),
-  }),
-);
-const choicePropSchema = z.intersection(
-  basePropSchema,
-  z.object({
-    type: z.literal('string'),
-    enum: z.array(z.string().nonempty()),
-    showAsRadio: z.boolean().optional(),
-    verticalLayout: z.boolean().optional(),
-  }),
-);
+interface ChoiceProp extends BaseProp {
+  type: 'string';
+  enum: string[];
+  showAsRadio?: boolean;
+  verticalLayout?: boolean;
+}
 
-const numberPropSchema = z.intersection(
-  basePropSchema,
-  z.object({
-    type: z.literal('number'),
-    minimum: z.number().optional(),
-    maximum: z.number().optional(),
-  }),
-);
-const integerPropSchema = z.intersection(
-  basePropSchema,
-  z.object({
-    type: z.literal('integer'),
-    minimum: z.number().optional(),
-    maximum: z.number().optional(),
-  }),
-);
+interface NumberProp extends BaseProp {
+  type: 'number';
+  minimum?: number;
+  maximum?: number;
+}
 
-const booleanPropSchema = z.intersection(
-  basePropSchema,
-  z.object({
-    type: z.literal('boolean'),
-  }),
-);
+interface IntegerProp extends BaseProp {
+  type: 'integer';
+  minimum?: number;
+  maximum?: number;
+}
 
-const propTypeSchema = z.union([
-  choicePropSchema,
-  stringPropSchema,
-  numberPropSchema,
-  integerPropSchema,
-  booleanPropSchema,
-]);
+interface BooleanProp extends BaseProp {
+  type: 'boolean';
+}
 
-const pluginDesignerSchema = z.object({
-  staticProperties: z.array(z.string()).optional(),
-  configurationRules: z.array(z.string()).optional(), // this should not be here for pahse 1 unless we are not going to fix up rules
-  canvasRestrictions: z
-    .object({
-      hideInToolbar: z.boolean().optional(),
-      minSize: minimumSizeSchema.optional(),
-      isFullRow: z.boolean().optional(),
-    })
-    .optional(),
-  langs: z.record(z.record(z.record(z.string()))).optional(),
-});
+export type PropType = ChoiceProp | StringProp | NumberProp | IntegerProp | BooleanProp;
 
-export const pluginContractSchema = z
-  .object({
-    version: z.string().nonempty(),
-    fallbackDisableSubmit: z.boolean(),
-    controlName: z.string().nonempty(),
+interface PluginDesigner {
+  staticProperties?: string[];
+  configurationRules?: string[];
+  canvasRestrictions?: {
+    hideInToolbar?: boolean;
+    minSize?: MinimumSize;
+    isFullRow?: boolean;
+  };
+}
 
-    // optional ones
-    widgetTooltip: z.string().optional(),
-    pluginAuthor: z.string().optional(),
-    pluginVersion: z.string().optional(),
-    searchTerms: z.array(z.string()).optional(),
-    required: z.array(z.string()).optional(),
-
-    description: z.string().optional(),
-    groupName: z
-      .union([
-        z.string(),
-        z.object({
-          name: z.string(),
-          order: z.number(),
-        }),
-      ])
-      .optional(),
-
-    iconUrl: z.string().optional(),
-    designer: pluginDesignerSchema.optional(),
-    properties: z.record(z.union([propTypeSchema, z.boolean()])).optional(),
-    standardProperties: z
-      .object({
-        fieldLabel: z.boolean().optional(),
-        toolTip: z.boolean().optional(),
-        description: z.boolean().optional(),
-        placeholder: z.boolean().optional(),
-        defaultValue: z.boolean().optional(),
-        visibility: z.boolean().optional(),
-        readOnly: z.boolean().optional(),
-        required: z.boolean().optional(),
-      })
-      .optional(),
-    events: z.array(z.string()).optional(),
-  })
-  .strict();
-
-export type PluginContract = z.infer<typeof pluginContractSchema>;
-// type of custom properties for plugins
-export type PluginProperty = z.infer<typeof propTypeSchema>;
+export interface PluginContract {
+  version: string;
+  fallbackDisableSubmit: boolean;
+  controlName: string;
+  widgetTooltip?: string;
+  pluginAuthor?: string;
+  pluginVersion?: string;
+  searchTerms?: string[];
+  required?: string[];
+  description?: string;
+  groupName?: string | { name: string; order: number };
+  iconUrl?: string;
+  designer?: PluginDesigner;
+  properties?: Record<string, PropType | boolean>;
+  standardProperties?: {
+    fieldLabel?: boolean;
+    toolTip?: boolean;
+    description?: boolean;
+    placeholder?: boolean;
+    defaultValue?: boolean;
+    visibility?: boolean;
+    readOnly?: boolean;
+    required?: boolean;
+  };
+  events?: string[];
+}
