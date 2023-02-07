@@ -1,6 +1,7 @@
 # @nintex/form-plugin-contract
 
 [![Apache License](https://img.shields.io/badge/license-Apache-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![npm version](https://badge.fury.io/js/%40nintex%2Fform-plugin-contract.svg)](https://badge.fury.io/js/%40nintex%2Fform-plugin-contract)
+[![Node.js Package](https://github.com/nintexplatform/form-plugin-contract/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/nintexplatform/form-plugin-contract/actions/workflows/npm-publish.yml)
 
 This repository contains the type definitions for Nintex Form plugins written in TypeScript.
 
