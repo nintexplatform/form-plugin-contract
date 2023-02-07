@@ -63,7 +63,7 @@ export interface PluginContract {
   groupName?: string | { name: string; order: number };
   iconUrl?: string;
   designer?: PluginDesigner;
-  properties?: Record<string, PropType | boolean>;
+  properties?: Record<string, PropType>;
   standardProperties?: {
     fieldLabel?: boolean;
     toolTip?: boolean;
@@ -76,3 +76,6 @@ export interface PluginContract {
   };
   events?: string[];
 }
+
+// this is same value is in package.json
+export const PluginContractVersion = '1.0.0-alpha';

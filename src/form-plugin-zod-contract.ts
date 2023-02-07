@@ -100,7 +100,7 @@ export const pluginContractSchema = z
 
     iconUrl: z.string().optional(),
     designer: pluginDesignerSchema.optional(),
-    properties: z.record(z.union([propTypeSchema, z.boolean()])).optional(),
+    properties: z.record(propTypeSchema).optional(),
     standardProperties: z
       .object({
         fieldLabel: z.boolean().optional(),
