@@ -2,17 +2,19 @@
 
 [![Apache License](https://img.shields.io/badge/license-Apache-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![npm version](https://badge.fury.io/js/%40nintex%2Fform-plugin-contract.svg)](https://badge.fury.io/js/%40nintex%2Fform-plugin-contract)
 
-This repository contains the type definitions for Nintex Form plugins, written in TypeScript.
+This repository contains the type definitions for Nintex Form plugins written in TypeScript.
+
+For more information about Nintex Form plugins, see the [Software Development Kit](https://help.nintex.com/en-US/formplugins/Home.htm).
 
 ## Installation
 
-You can install the `@nintex/form-plugin-contract` package using npm:
+Install the `@nintex/form-plugin-contract` package using npm:
 
 `npm install @nintex/form-plugin-contract`
 
 ## Usage
 
-In your TypeScript project, you can import the types as follows:
+In your TypeScript project, import the types as follows:
 
 ```ts
 import { PluginContract, PropType as PluginProperty } from '@nintex/form-plugin-contract';
@@ -40,7 +42,7 @@ const customProp: PluginProperty = {
 };
 ```
 
-Using zod schema to validate your plugin:
+Use zod schema to validate your plugin:
 
 ```ts
 import { pluginContractSchema } from '@nintex/form-plugin-contract';
