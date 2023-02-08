@@ -1,6 +1,6 @@
 {
   "name": "@nintex/form-plugin-contract",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-beta",
   "author": "Nintex",
   "description": "Nintex Forms Plugin Contract",
   "main": "dist/cjs/index.js",
