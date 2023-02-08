@@ -17,6 +17,12 @@ jobs:
           node-version: 16
       - run: npm ci
       - run: npm run build
+      - name: Archive dist artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-folder
+          path: |
+            dist
 
   publish-npm:
     needs: build
@@ -27,6 +33,10 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
+      - name: Download dist files
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-folder
       - run: npm ci
       - run: npm publish --access public
         env:
