@@ -20,12 +20,19 @@ In your TypeScript project, import the types as follows:
 ```ts
 import { PluginContract, PropType as PluginProperty } from '@nintex/form-plugin-contract';
 
+// Use the PluginProperty type to define custom properties for your plugin
+const customProp: PluginProperty = {
+  type: 'string',
+  title: 'Custom Property',
+  description: 'This is a custom property',
+};
 // Use the PluginContract type to define the contract for your Nintex Form plugin
 const plugin: PluginContract = {
   version: '1.0',
   fallbackDisableSubmit: false,
   controlName: 'Example Plugin',
   properties: {
+    customProp,
     exampleProp: {
       type: 'string',
       title: 'Example Property',
@@ -33,13 +40,6 @@ const plugin: PluginContract = {
       defaultValue: 'Hello, world!',
     },
   },
-};
-
-// Use the PluginProperty type to define custom properties for your plugin
-const customProp: PluginProperty = {
-  type: 'string',
-  title: 'Custom Property',
-  description: 'This is a custom property',
 };
 ```
 
