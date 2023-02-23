@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const basePropSchema = z.object({
   title: z.string().optional(),
-  required: z.array(z.string()).optional(),
+  required: z.boolean(),
   description: z.string().optional(),
   defaultValue: z.union([z.string(), z.boolean(), z.number()]).optional(),
   format: z.string().optional(),

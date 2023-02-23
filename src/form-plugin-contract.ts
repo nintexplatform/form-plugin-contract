@@ -1,6 +1,6 @@
 interface BaseProp {
-  title?: string;
-  required?: string[];
+  title: string;
+  required?: boolean;
   description?: string;
   defaultValue?: string | boolean | number;
   format?: string;
@@ -78,4 +78,4 @@ export interface PluginContract {
 }
 
 // this is same value is in package.json
-export const PluginContractVersion = '1.0.0-alpha';
+export const PluginContractVersion = '1.0.0-beta.3';
