@@ -38,6 +38,7 @@ const plugin: PluginContract = {
       title: 'Example Property',
       description: 'This is an example property',
       defaultValue: 'Hello, world!',
+      required: true
     },
   },
 };
