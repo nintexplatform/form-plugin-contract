@@ -38,7 +38,13 @@ interface BooleanProp extends BaseProp {
   type: 'boolean';
 }
 
-export type PropType = ChoiceProp | StringProp | NumberProp | IntegerProp | BooleanProp;
+export type ObjectProp = BaseProp & {
+  type: 'object';
+  placeholder?: string;
+  properties: { [key: string]: PropType };
+};
+
+export type PropType = ChoiceProp | StringProp | NumberProp | IntegerProp | BooleanProp | ObjectProp;
 
 interface PluginDesigner {
   staticProperties?: string[];
