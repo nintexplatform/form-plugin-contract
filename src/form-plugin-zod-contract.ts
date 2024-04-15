@@ -1,10 +1,12 @@
 import { z } from 'zod';
 
+const defaultObjectValue = z.record(z.lazy(() => z.union([z.string(), z.number(), z.boolean(), defaultObjectValue])));
+
 export const basePropSchema = z.object({
   title: z.string().optional(),
   required: z.boolean().optional(),
   description: z.string().optional(),
-  defaultValue: z.union([z.string(), z.boolean(), z.number()]).optional(),
+  defaultValue: z.union([z.string(), z.boolean(), z.number(), defaultObjectValue]).optional(),
   format: z.string().optional(),
   isValueField: z.boolean().optional(),
 });
@@ -53,12 +55,34 @@ const booleanPropSchema = z.intersection(
   }),
 );
 
+const objectPropSchema = z.intersection(
+  basePropSchema,
+  z.object({
+    type: z.literal('object'),
+    properties: z
+      .lazy(() =>
+        z.record(
+          z.union([
+            choicePropSchema,
+            stringPropSchema,
+            numberPropSchema,
+            integerPropSchema,
+            booleanPropSchema,
+            objectPropSchema,
+          ]),
+        ),
+      )
+      .optional(),
+  }),
+);
+
 const propTypeSchema = z.union([
   choicePropSchema,
   stringPropSchema,
   numberPropSchema,
   integerPropSchema,
   booleanPropSchema,
+  objectPropSchema,
 ]);
 
 const pluginDesignerSchema = z.object({
