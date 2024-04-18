@@ -87,7 +87,6 @@ const propTypeSchema = z.union([
 
 const pluginDesignerSchema = z.object({
   staticProperties: z.array(z.string()).optional(),
-  configurationRules: z.array(z.string()).optional(), // this should not be here for pahse 1 unless we are not going to fix up rules
   canvasRestrictions: z
     .object({
       hideInToolbar: z.boolean().optional(),
@@ -95,7 +94,6 @@ const pluginDesignerSchema = z.object({
       isFullRow: z.boolean().optional(),
     })
     .optional(),
-  langs: z.record(z.record(z.record(z.string()))).optional(),
 });
 
 export const pluginContractSchema = z
@@ -105,11 +103,9 @@ export const pluginContractSchema = z
     controlName: z.string().nonempty(),
 
     // optional ones
-    widgetTooltip: z.string().optional(),
     pluginAuthor: z.string().optional(),
     pluginVersion: z.string().optional(),
     searchTerms: z.array(z.string()).optional(),
-    required: z.array(z.string()).optional(),
 
     description: z.string().optional(),
     groupName: z

@@ -48,7 +48,6 @@ export type PropType = ChoiceProp | StringProp | NumberProp | IntegerProp | Bool
 
 interface PluginDesigner {
   staticProperties?: string[];
-  configurationRules?: string[];
   canvasRestrictions?: {
     hideInToolbar?: boolean;
     minSize?: MinimumSize;
@@ -60,11 +59,9 @@ export interface PluginContract {
   version: string;
   fallbackDisableSubmit: boolean;
   controlName: string;
-  widgetTooltip?: string;
   pluginAuthor?: string;
   pluginVersion?: string;
   searchTerms?: string[];
-  required?: string[];
   description?: string;
   groupName?: string | { name: string; order: number };
   iconUrl?: string;
