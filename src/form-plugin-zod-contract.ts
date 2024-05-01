@@ -1,5 +1,8 @@
 import { z } from 'zod';
 
+const objectKeyRegex = /^\w+([_]\w+)*$/;
+const nameRegex = /^\w+([\s-_]\w+)*$/;
+
 const defaultObjectValue = z.record(z.lazy(() => z.union([z.string(), z.number(), z.boolean(), defaultObjectValue])));
 
 export const basePropSchema = z.object({
@@ -100,7 +103,7 @@ export const pluginContractSchema = z
   .object({
     version: z.string().nonempty(),
     fallbackDisableSubmit: z.boolean(),
-    controlName: z.string().nonempty(),
+    controlName: z.string().nonempty().regex(nameRegex).max(40),
 
     // optional ones
     pluginAuthor: z.string().optional(),
@@ -120,7 +123,7 @@ export const pluginContractSchema = z
 
     iconUrl: z.string().optional(),
     designer: pluginDesignerSchema.optional(),
-    properties: z.record(propTypeSchema).optional(),
+    properties: z.record(z.string().regex(objectKeyRegex), z.union([propTypeSchema, z.boolean()])).optional(),
     standardProperties: z
       .object({
         fieldLabel: z.boolean().optional(),
