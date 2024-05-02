@@ -6,8 +6,8 @@ const nameRegex = /^\w+([\s-_]\w+)*$/;
 const defaultObjectValue = z.record(z.lazy(() => z.union([z.string(), z.number(), z.boolean(), defaultObjectValue])));
 
 export const basePropSchema = z.object({
-  title: z.string().optional(),
-  required: z.boolean().optional(),
+  title: z.string().regex(nameRegex).max(40).optional(),
+  required: z.array(z.string()).optional(),
   description: z.string().optional(),
   defaultValue: z.union([z.string(), z.boolean(), z.number(), defaultObjectValue]).optional(),
   format: z.string().optional(),
