@@ -1,40 +1,40 @@
-interface BaseProp {
+export interface BaseProp {
   title: string;
-  required?: boolean;
+  required?: string[];
   description?: string;
-  defaultValue?: string | boolean | number;
+  defaultValue?: string | boolean | number | object | undefined;
   format?: string;
   isValueField?: boolean;
 }
 
-type MinimumSize = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+export type MinimumSize = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
-interface StringProp extends BaseProp {
+export interface StringProp extends BaseProp {
   type: 'string';
   minLength?: number;
   maxLength?: number;
 }
 
-interface ChoiceProp extends BaseProp {
+export interface ChoiceProp extends BaseProp {
   type: 'string';
   enum: string[];
   showAsRadio?: boolean;
   verticalLayout?: boolean;
 }
 
-interface NumberProp extends BaseProp {
+export interface NumberProp extends BaseProp {
   type: 'number';
   minimum?: number;
   maximum?: number;
 }
 
-interface IntegerProp extends BaseProp {
+export interface IntegerProp extends BaseProp {
   type: 'integer';
   minimum?: number;
   maximum?: number;
 }
 
-interface BooleanProp extends BaseProp {
+export interface BooleanProp extends BaseProp {
   type: 'boolean';
 }
 
