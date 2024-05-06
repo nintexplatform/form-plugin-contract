@@ -81,4 +81,4 @@ export interface PluginContract {
 }
 
 // this is same value is in package.json
-export const PluginContractVersion = '1.0.2';
+export const PluginContractVersion = '1.0.3';
