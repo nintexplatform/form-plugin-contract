@@ -1,6 +1,6 @@
 export interface BaseProp {
   title: string;
-  required?: string[];
+  required?: boolean;
   description?: string;
   defaultValue?: string | boolean | number | object | undefined;
   format?: string;
