@@ -55,6 +55,20 @@ interface PluginDesigner {
   };
 }
 
+export interface StandardProperties {
+  // these are helpers to allow consistency in the config panel and functionality
+  // configure title of the control
+  fieldLabel?: boolean;
+  tooltip?: boolean;
+  description?: boolean;
+  placeholder?: boolean;
+  defaultValue?: boolean;
+  visibility?: boolean;
+  readOnly?: boolean;
+  required?: boolean;
+  hideConnectedTo?: boolean;
+}
+
 export interface PluginContract {
   version: string;
   fallbackDisableSubmit: boolean;
@@ -67,18 +81,11 @@ export interface PluginContract {
   iconUrl?: string;
   designer?: PluginDesigner;
   properties?: Record<string, PropType>;
-  standardProperties?: {
-    fieldLabel?: boolean;
-    toolTip?: boolean;
-    description?: boolean;
-    placeholder?: boolean;
-    defaultValue?: boolean;
-    visibility?: boolean;
-    readOnly?: boolean;
-    required?: boolean;
-  };
+  standardProperties?: StandardProperties;
   events?: string[];
 }
 
+export const pluginValueChangedEvent = 'ntx-value-change';
+
 // this is same value is in package.json
-export const PluginContractVersion = '1.0.3';
+export const PluginContractVersion = '1.0.4';
