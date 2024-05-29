@@ -14,6 +14,10 @@ export const basePropSchema = z.object({
   isValueField: z.boolean().optional(),
 });
 
+const translationOptionSchema = z.object({ 
+  translatableCustomProperties: z.array(z.string()).optional(),
+});
+
 const minimumSizeSchema = z.number().int().positive().lte(12).gte(1);
 
 const stringPropSchema = z.intersection(
@@ -123,6 +127,7 @@ export const pluginContractSchema = z
 
     iconUrl: z.string().optional(),
     designer: pluginDesignerSchema.optional(),
+    translationOption: translationOptionSchema.optional(),
     properties: z.record(z.string().regex(objectKeyRegex), z.union([propTypeSchema, z.boolean()])).optional(),
     standardProperties: z
       .object({

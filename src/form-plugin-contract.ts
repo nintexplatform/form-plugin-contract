@@ -55,6 +55,10 @@ interface PluginDesigner {
   };
 }
 
+interface TranslationOption {
+  translatableCustomProperties?: string[];
+}
+
 export interface StandardProperties {
   // these are helpers to allow consistency in the config panel and functionality
   // configure title of the control
@@ -80,6 +84,7 @@ export interface PluginContract {
   groupName?: string | { name: string; order: number };
   iconUrl?: string;
   designer?: PluginDesigner;
+  translationOption?: TranslationOption;
   properties?: Record<string, PropType>;
   standardProperties?: StandardProperties;
   events?: string[];
