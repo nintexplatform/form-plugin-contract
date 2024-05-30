@@ -80,6 +80,9 @@ const pluginData = {
     readOnly: true,
     required: true,
   },
+  translationOption: {
+    translatableCustomProperties: ['exampleProp']
+  }
   events: ['exampleEvent'],
 };
 
