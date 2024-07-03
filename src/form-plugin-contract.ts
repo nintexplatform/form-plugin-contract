@@ -88,4 +88,4 @@ export interface PluginContract {
 export const pluginValueChangedEvent = 'ntx-value-change';
 
 // this is same value is in package.json
-export const PluginContractVersion = '1.0.4';
+export const PluginContractVersion = '1.0.5';
